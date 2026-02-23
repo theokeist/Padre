@@ -4,7 +4,7 @@
 
 use strict;
 use warnings;
-use Test::More tests => 773;
+use Test::More tests => 788;
 use Test::NoWarnings;
 use File::Spec::Functions;
 use t::lib::Padre;
@@ -56,6 +56,15 @@ SCOPE: {
 		file => $file,
 	);
 	is( $type, 'application/x-perl', '->detect(file=>perl)' );
+}
+
+
+# Explicit checks for modern Raku extension and shebang detection
+SCOPE: {
+	is( Padre::MIME->detect( file => 'sample.raku' ), 'application/x-perl6', '->detect raku extension' );
+
+	is( Padre::MIME->detect_content("#!/usr/bin/env raku\n"), 'application/x-perl6', '->detect_content raku shebang' );
+	is( Padre::MIME->detect_content("#!/usr/bin/env perl\n"), 'application/x-perl', '->detect_content perl shebang' );
 }
 
 # Detect the mime type using svn metadata

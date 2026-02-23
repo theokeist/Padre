@@ -41,7 +41,7 @@ Padre does B<not> currently support opening non-text files.
 
 Padre has a built-in hash mapping the file extensions to MIME types.
 In certain cases (.t, .pl, .pm) Padre also looks in the content of the
-file to determine if the file is Perl 5 or Perl 6.
+file to determine if the file is Perl 5 or Raku (Perl 6).
 
 MIME types are mapped to lexers that provide the syntax highlighting.
 
@@ -97,7 +97,7 @@ MIME types regardless if the plug-in also provides the class that
 implements the features of that MIME type. By default Padre
 supports the built-in syntax highlighting of Scintilla.
 Perl 5 currently has two L<PPI> based syntax highlighter,
-Perl 6 can use the STD.pm or Rakudo/PGE for syntax highlighting but
+Raku (Perl 6) can use STD.pm or Rakudo/PGE for syntax highlighting but
 there are two plug-ins - Parrot and Kate - that can provide syntax
 highlighting to a wide range of MIME types.
 

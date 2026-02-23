@@ -436,7 +436,7 @@ Padre::Wx::Dialog::HelpSearch - Padre Shiny Help Search Dialog
 
 This opens a dialog where you can search for help topics...
 
-Note: This used to be Perl 6 Help Dialog (in C<Padre::Plugin::Perl6>) and but it
+Note: This used to be a Perl 6 / Raku Help Dialog (in C<Padre::Plugin::Perl6>) and but it
 has been moved to Padre core.
 
 In order to setup a help system see L<Padre::Help>.
