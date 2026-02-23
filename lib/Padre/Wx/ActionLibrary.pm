@@ -192,8 +192,8 @@ sub init {
 
 	Padre::Wx::Action->new(
 		name       => 'file.new_p6_script',
-		label      => _T('Perl &6 Script'),
-		comment    => _T('Open a document with a skeleton Perl 6 script'),
+		label      => _T('&Raku Script'),
+		comment    => _T('Open a document with a skeleton Raku script'),
 		menu_event => sub {
 			$_[0]->start_perl6_script;
 		},

@@ -1502,7 +1502,49 @@ sub new {
 	$self->{lang_perl6_auto_detection} = Wx::CheckBox->new(
 		$m_panel6,
 		-1,
-		Wx::gettext("Detect Perl 6 files"),
+		Wx::gettext("Detect Raku files"),
+		Wx::DefaultPosition,
+		Wx::DefaultSize,
+	);
+
+	my $m_staticText_raku_exec = Wx::StaticText->new(
+		$m_panel6,
+		-1,
+		Wx::gettext("Raku Executable (raku or rakudo):"),
+	);
+
+	$self->{run_raku_cmd} = Wx::TextCtrl->new(
+		$m_panel6,
+		-1,
+		"",
+		Wx::DefaultPosition,
+		Wx::DefaultSize,
+	);
+
+	my $m_staticText_raku_args = Wx::StaticText->new(
+		$m_panel6,
+		-1,
+		Wx::gettext("Raku Interpreter Arguments (default)"),
+	);
+
+	$self->{run_raku_interpreter_args_default} = Wx::TextCtrl->new(
+		$m_panel6,
+		-1,
+		"",
+		Wx::DefaultPosition,
+		Wx::DefaultSize,
+	);
+
+	my $m_staticText_raku_script_args = Wx::StaticText->new(
+		$m_panel6,
+		-1,
+		Wx::gettext("Raku Script Arguments (default)"),
+	);
+
+	$self->{run_raku_script_args_default} = Wx::TextCtrl->new(
+		$m_panel6,
+		-1,
+		"",
 		Wx::DefaultPosition,
 		Wx::DefaultSize,
 	);
@@ -1887,6 +1929,12 @@ sub new {
 	$fgSizer711->SetFlexibleDirection(Wx::BOTH);
 	$fgSizer711->SetNonFlexibleGrowMode(Wx::FLEX_GROWMODE_ALL);
 	$fgSizer711->Add( $self->{lang_perl6_auto_detection}, 0, Wx::ALL, 5 );
+	$fgSizer711->Add( $m_staticText_raku_exec, 0, Wx::ALIGN_CENTER_VERTICAL | Wx::ALL, 5 );
+	$fgSizer711->Add( $self->{run_raku_cmd}, 0, Wx::ALL | Wx::EXPAND, 5 );
+	$fgSizer711->Add( $m_staticText_raku_args, 0, Wx::ALIGN_CENTER_VERTICAL | Wx::ALL, 5 );
+	$fgSizer711->Add( $self->{run_raku_interpreter_args_default}, 0, Wx::ALL | Wx::EXPAND, 5 );
+	$fgSizer711->Add( $m_staticText_raku_script_args, 0, Wx::ALIGN_CENTER_VERTICAL | Wx::ALL, 5 );
+	$fgSizer711->Add( $self->{run_raku_script_args_default}, 0, Wx::ALL | Wx::EXPAND, 5 );
 
 	my $bSizer711 = Wx::BoxSizer->new(Wx::VERTICAL);
 	$bSizer711->Add( $m_staticText391, 0, Wx::ALL, 5 );
@@ -1906,7 +1954,7 @@ sub new {
 	$self->{treebook}->AddPage( $self->{keybindings_panel}, Wx::gettext("Key Bindings"), 0 );
 	$self->{treebook}->AddPage( $m_panel8, Wx::gettext("File Handling"), 0 );
 	$self->{treebook}->AddPage( $m_panel7, Wx::gettext("Language - Perl 5"), 0 );
-	$self->{treebook}->AddPage( $m_panel6, Wx::gettext("Language - Perl 6"), 0 );
+	$self->{treebook}->AddPage( $m_panel6, Wx::gettext("Language - Raku"), 0 );
 
 	my $buttons = Wx::BoxSizer->new(Wx::HORIZONTAL);
 	$buttons->Add( $self->{save}, 0, Wx::ALL, 5 );
@@ -2196,6 +2244,18 @@ sub lang_perl6_auto_detection {
 	$_[0]->{lang_perl6_auto_detection};
 }
 
+sub run_raku_cmd {
+	$_[0]->{run_raku_cmd};
+}
+
+sub run_raku_interpreter_args_default {
+	$_[0]->{run_raku_interpreter_args_default};
+}
+
+sub run_raku_script_args_default {
+	$_[0]->{run_raku_script_args_default};
+}
+
 sub preview_refresh {
 	$_[0]->main->error('Handler method preview_refresh for event editor_style.OnChoice not implemented');
 }
@@ -2242,4 +2302,3 @@ sub cancel {
 # LICENSE
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl 5 itself.
-
