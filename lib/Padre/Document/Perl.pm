@@ -394,8 +394,13 @@ sub get_command {
 	}
 
 	$arg_ref->{script_args} = Padre::DB::History->previous( 'run_script_args_' . $script_base );
-	$arg_ref->{script_args} = $config->run_script_args_default
-		if !exists $arg_ref->{script_args} || !$arg_ref->{script_args};
+	if ( !exists $arg_ref->{script_args} || !$arg_ref->{script_args} ) {
+		if ( ( $self->mimetype || '' ) eq 'application/x-perl6' ) {
+			$arg_ref->{script_args} = $config->run_raku_script_args_default;
+		} else {
+			$arg_ref->{script_args} = $config->run_script_args_default;
+		}
+	}
 
 	# Run with console Perl to prevent unexpected results under wxperl
 	# The configuration values is cheaper to get compared to cperl(),
@@ -404,7 +409,11 @@ sub get_command {
 	$arg_ref->{perl}      = $self->get_interpreter if !exists $arg_ref->{perl} || !$arg_ref->{perl};
 	$arg_ref->{perl_args} = Padre::DB::History->previous( 'run_perl_args_' . $script_base );
 	if ( !exists $arg_ref->{perl_args} || !$arg_ref->{perl_args} ) {
-		$arg_ref->{perl_args} = $config->run_interpreter_args_default;
+		if ( ( $self->mimetype || '' ) eq 'application/x-perl6' ) {
+			$arg_ref->{perl_args} = $config->run_raku_interpreter_args_default;
+		} else {
+			$arg_ref->{perl_args} = $config->run_interpreter_args_default;
+		}
 
 		#add params that are in the hash-bang line of the file itself
 		my ( $hashbangperl, $hashbangparams ) = $self->guess_hashbang_params();
@@ -489,24 +498,34 @@ sub get_interpreter {
 	my $trace   = exists $arg_ref->{trace} ? $arg_ref->{trace} : 0;
 	my $config  = $self->config;
 
-	# The configuration value is cheaper to get compared to cperl(),
-	# try it first.
-	my $perl = $config->run_perl_cmd;
+	my $is_raku = ( $self->mimetype || '' ) eq 'application/x-perl6';
 
-	# warn if the Perl interpreter is not executable
+	# Choose language-specific configured interpreter first
+	my $perl = $is_raku ? $config->run_raku_cmd : $config->run_perl_cmd;
+
+	# warn if configured interpreter is not executable
 	if ( defined $perl and $perl ne '' ) {
 		if ( !-x $perl ) {
+			my $lang = $is_raku ? 'Raku' : 'Perl';
 			Padre->ide->wx->main->message(
 				Wx::gettext(
 					sprintf(
-						'%s seems to be no executable Perl interpreter, using the system default perl instead.', $perl
+						'%s seems to be no executable %s interpreter, using the system default instead.', $perl, $lang
 					)
 				),
 			);
+			$perl = '';
+		}
+	}
+
+	# Fallback per language
+	if ( !defined($perl) or $perl eq '' ) {
+		if ($is_raku) {
+			require File::Which;
+			$perl = File::Which::which('raku') || File::Which::which('rakudo') || '';
+		} else {
 			$perl = Padre::Perl::cperl();
 		}
-	} else {
-		$perl = Padre::Perl::cperl();
 	}
 
 	return $perl;

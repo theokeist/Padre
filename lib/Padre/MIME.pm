@@ -123,11 +123,7 @@ my %EXT = (
 	zip   => 'application/zip',
 	pasm  => 'application/x-pasm',
 	pir   => 'application/x-pir',
-	p6    => 'application/x-perl6',      # See Perl6/Spec/S01-overview.pod
-	p6l   => 'application/x-perl6',
-	p6m   => 'application/x-perl6',
-	pl6   => 'application/x-perl6',
-	pm6   => 'application/x-perl6',
+	raku  => 'application/x-perl6',
 	pas   => 'text/x-pascal',
 	dpr   => 'text/x-pascal',
 	dfm   => 'text/x-pascal',
@@ -599,9 +595,9 @@ sub detect {
 	}
 
 	# If we found Perl 5 we might need to second-guess it and check
-	# for it actually being Perl 6.
+	# for it actually being Raku.
 	if ( $mime eq 'application/x-perl' and $param{perl6} ) {
-		if ( $class->detect_perl6($text) ) {
+		if ( $class->detect_raku($text) ) {
 			$mime = 'application/x-perl6';
 		}
 	}
@@ -673,7 +669,10 @@ sub detect_content {
 	};
 
 	# Is this a script of some kind?
-	if ( $text =~ /\A#!.*\bperl6?\b/m ) {
+	if ( $text =~ /\A#!.*\braku\b/m ) {
+		return 'application/x-perl6';
+	}
+	if ( $text =~ /\A#!.*\bperl\b/m ) {
 		return 'application/x-perl';
 	}
 	if ( $text =~ /\A#!.*\bsh\b.*(?:\n.*)?\nexec wish/m ) {
@@ -834,9 +833,9 @@ sub detect_content {
   my $is_perl6 = Padre::MIME->detect_perl6($content);
 
 The C<detect_perl6> is a special case method used to distinguish between
-Perl 5 and Perl 6, as the two types often share the same file extension.
+Perl 5 and Raku, as the two types often share the same file extension.
 
-Returns true if the content appears to be Perl 6, or false if the content
+Returns true if the content appears to be Raku, or false if the content
 appears to be Perl 5.
 
 =cut
@@ -845,10 +844,10 @@ sub detect_perl6 {
 	my $class = shift;
 	my $text  = shift;
 
-	# Empty/undef text is not Perl 6 :)
+	# Empty/undef text is not Raku :)
 	return 0 unless $text;
 
-	# Perl 6 POD
+	# Raku POD
 	return 1 if $text =~ /^=begin\s+pod/msx;
 
 	# Needed for eg/perl5_with_perl6_example.pod
@@ -860,13 +859,13 @@ sub detect_perl6 {
 	# Special case: If MooseX::Declare is there, then we're in Perl 5 land
 	return 0 if $text =~ /^\s*use\s+MooseX::Declare/msx;
 
-	# Perl 6 'use v6;'
-	return 1 if $text =~ /^\s*use\s+v6;/msx;
+	# Raku use v6 pragma (including versioned forms, e.g. use v6.d;)
+	return 1 if $text =~ /^\s*use\s+v6(?:\.[A-Za-z0-9_]+)?\s*;/msx;
 
-	# One of Perl 6 compilation units
+	# One of Raku compilation units
 	return 1 if $text =~ /^\s*(?:class|grammar|module|role)\s+\w/msx;
 
-	# Not Perl 6 for sure...
+	# Not Raku for sure...
 	return 0;
 }
 
@@ -1183,7 +1182,7 @@ Padre::MIME->create(
 
 Padre::MIME->create(
 	type      => 'application/x-perl6',
-	name      => 'Perl 6',
+	name      => 'Raku',
 	supertype => 'text/plain',
 );
 

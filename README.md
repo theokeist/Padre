@@ -74,6 +74,27 @@ Then open a new terminal and type in
 perl Makefile.PL
 ```
 
+Pre-install dependencies using the repository cpanfile:
+
+```
+cpanm --installdeps .
+cpanm --with-configure --with-test --installdeps .
+```
+
+
+On Windows, if `cpanm` fetch fails, use:
+
+```
+cpan -T Module::Install
+cpan -T --installdeps .
+```
+
+Or force mirror:
+
+```
+cpanm --mirror https://cpan.metacpan.org --mirror-only --installdeps .
+```
+
 Install the missing modules:
 
 ```
