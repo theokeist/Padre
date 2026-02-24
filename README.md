@@ -74,6 +74,13 @@ Then open a new terminal and type in
 perl Makefile.PL
 ```
 
+Pre-install dependencies using the repository cpanfile:
+
+```
+cpanm --installdeps .
+cpanm --with-configure --with-test --installdeps .
+```
+
 Install the missing modules:
 
 ```

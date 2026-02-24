@@ -1795,7 +1795,7 @@ msgid "Description:"
 msgstr ""
 
 #: lib/Padre/Wx/FBP/Preferences.pm:1505
-msgid "Detect Perl 6 files"
+msgid "Detect Raku files"
 msgstr ""
 
 #: lib/Padre/Wx/FBP/Preferences.pm:1034
@@ -3024,7 +3024,7 @@ msgid "Language - Perl 5"
 msgstr ""
 
 #: lib/Padre/Wx/FBP/Preferences.pm:1909
-msgid "Language - Perl 6"
+msgid "Language - Raku"
 msgstr ""
 
 #: lib/Padre/Wx/FBP/Preferences.pm:1365 lib/Padre/Wx/FBP/Preferences.pm:1488
@@ -3623,7 +3623,7 @@ msgid "Open a document with a skeleton Perl 5 test script"
 msgstr ""
 
 #: lib/Padre/Wx/ActionLibrary.pm:195
-msgid "Open a document with a skeleton Perl 6 script"
+msgid "Open a document with a skeleton Raku script"
 msgstr ""
 
 #: lib/Padre/Wx/ActionLibrary.pm:220
@@ -3902,7 +3902,7 @@ msgid "Perl"
 msgstr ""
 
 #: lib/Padre/Wx/ActionLibrary.pm:194
-msgid "Perl &6 Script"
+msgid "&Raku Script"
 msgstr ""
 
 #: lib/Padre/Wx/ActionLibrary.pm:159
@@ -5554,7 +5554,7 @@ msgid "Toggle Diff window feature that compares two buffers graphically"
 msgstr ""
 
 #: lib/Padre/Config.pm:1669
-msgid "Toggle Perl 6 auto detection in Perl 5 files"
+msgid "Toggle Raku auto detection in Perl 5 files"
 msgstr ""
 
 #: lib/Padre/Wx/FBP/Debugger.pm:316
@@ -6091,4 +6091,86 @@ msgid ""
 "Requires the PadWalker module version 0.08 or higher; will warn if this "
 "isn't installed. Output is pretty-printed in the same style as for V and the "
 "format is controlled by the same options."
+msgstr ""
+
+#: lib/Padre/Wx/FBP/Preferences.pm
+msgid "Raku Executable (raku or rakudo):"
+msgstr ""
+
+#: lib/Padre/Config.pm
+msgid "Raku executable for running Raku files (leave empty to auto-detect raku/rakudo)"
+msgstr ""
+
+#: modern-raku-settings
+msgid "Raku Interpreter Arguments (default)"
+msgstr ""
+
+#: modern-raku-settings
+msgid "Raku Script Arguments (default)"
+msgstr ""
+
+#: modern-raku-settings
+msgid "Default Raku interpreter arguments (used for run/build)"
+msgstr ""
+
+#: modern-raku-settings
+msgid "Default Raku script arguments (used for run/build)"
+msgstr ""
+
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Search CPAN for &Selection"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Open CPAN Explorer, search selected text (or prompt), and load module docs"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Enter module or distribution name to search on CPAN"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Search CPAN"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Read App::cpanminus in CPAN Explorer"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Open CPAN Explorer and load App::cpanminus documentation"
+msgstr ""
+
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Show cpanm --info for Selection"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Run local cpanm --info for selected module/distribution in the Output panel"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Enter module or distribution name for local cpanm --info"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Local cpanm info"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Open perldoc for Selection"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Run local perldoc for selected module/topic in the Output panel"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Enter perldoc topic or module name"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Local perldoc"
 msgstr ""

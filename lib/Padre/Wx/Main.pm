@@ -6499,7 +6499,7 @@ the preferences of the user applied already.
 
     $main->start_perl6_script;
 
-Create a new blank Perl 6 script, applying the user's style preferences if
+Create a new blank Raku script, applying the user's style preferences if
 possible.
 
 =cut

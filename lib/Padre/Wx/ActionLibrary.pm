@@ -192,8 +192,8 @@ sub init {
 
 	Padre::Wx::Action->new(
 		name       => 'file.new_p6_script',
-		label      => _T('Perl &6 Script'),
-		comment    => _T('Open a document with a skeleton Perl 6 script'),
+		label      => _T('&Raku Script'),
+		comment    => _T('Open a document with a skeleton Raku script'),
 		menu_event => sub {
 			$_[0]->start_perl6_script;
 		},
@@ -2427,6 +2427,120 @@ sub init {
 			$_[0]->cpan->focus_on_search;
 		},
 	) if Padre::Feature::CPAN;
+
+
+	Padre::Wx::Action->new(
+		name       => 'window.cpan_search_selection',
+		label      => _T('Search CPAN for &Selection'),
+		comment    => _T('Open CPAN Explorer, search selected text (or prompt), and load module docs'),
+		shortcut   => 'Alt-Shift-X',
+		menu_event => sub {
+			my $main = shift;
+			$main->show_cpan(1);
+			my $cpan = $main->cpan;
+
+			my $module = '';
+			if ( my $current = $main->current ) {
+				if ( my $editor = $current->editor ) {
+					$module = $editor->GetSelectedText || '';
+				}
+			}
+
+			$module =~ s/^\s+//;
+			$module =~ s/\s+$//;
+			if ( !length $module ) {
+				$module = Wx::GetTextFromUser(
+					Wx::gettext('Enter module or distribution name to search on CPAN'),
+					Wx::gettext('Search CPAN'),
+					'App::cpanminus'
+				);
+			}
+
+			return unless defined $module;
+			$module =~ s/^\s+//;
+			$module =~ s/\s+$//;
+			return unless length $module;
+
+			$cpan->search_module($module);
+		},
+	) if Padre::Feature::CPAN;
+
+	Padre::Wx::Action->new(
+		name       => 'window.cpan_read_cpanminus',
+		label      => _T('Read App::cpanminus in CPAN Explorer'),
+		comment    => _T('Open CPAN Explorer and load App::cpanminus documentation'),
+		menu_event => sub {
+			$_[0]->show_cpan(1);
+			$_[0]->cpan->search_module('App::cpanminus');
+		},
+	) if Padre::Feature::CPAN;
+
+
+	Padre::Wx::Action->new(
+		name       => 'window.cpanm_info_selection',
+		label      => _T('Show cpanm --info for Selection'),
+		comment    => _T('Run local cpanm --info for selected module/distribution in the Output panel'),
+		menu_event => sub {
+			my $main = shift;
+			my $query = '';
+			if ( my $current = $main->current ) {
+				if ( my $editor = $current->editor ) {
+					$query = $editor->GetSelectedText || '';
+				}
+			}
+
+			$query =~ s/^\s+//;
+			$query =~ s/\s+$//;
+			if ( !length $query ) {
+				$query = Wx::GetTextFromUser(
+					Wx::gettext('Enter module or distribution name for local cpanm --info'),
+					Wx::gettext('Local cpanm info'),
+					'App::cpanminus'
+				);
+			}
+			return unless defined $query;
+			$query =~ s/^\s+//;
+			$query =~ s/\s+$//;
+			return unless length $query;
+			$query =~ s/"/\"/g;
+
+			$main->show_output(1);
+			$main->run_command(qq{cpanm --info "$query"});
+		},
+	);
+
+	Padre::Wx::Action->new(
+		name       => 'help.perldoc_selection',
+		label      => _T('Open perldoc for Selection'),
+		comment    => _T('Run local perldoc for selected module/topic in the Output panel'),
+		menu_event => sub {
+			my $main = shift;
+			my $query = '';
+			if ( my $current = $main->current ) {
+				if ( my $editor = $current->editor ) {
+					$query = $editor->GetSelectedText || '';
+				}
+			}
+
+			$query =~ s/^\s+//;
+			$query =~ s/\s+$//;
+			if ( !length $query ) {
+				$query = Wx::GetTextFromUser(
+					Wx::gettext('Enter perldoc topic or module name'),
+					Wx::gettext('Local perldoc'),
+					'perlsyn'
+				);
+			}
+			return unless defined $query;
+			$query =~ s/^\s+//;
+			$query =~ s/\s+$//;
+			return unless length $query;
+			$query =~ s/"/\"/g;
+
+			$main->show_output(1);
+			$main->run_command(qq{perldoc "$query"});
+		},
+	);
 
 	Padre::Wx::Action->new(
 		name       => 'window.goto_functions_window',
