@@ -17,10 +17,13 @@ Need Module::Install 1.04+ before we can continue.
 Install dependencies using normal distribution flow, for example:
   cpanm Module::Install
   cpanm --installdeps .
+  cpan -T Module::Install
+  cpan -T --installdeps .
 INSTALL_HINT
 	}
 
 	Module::Install->VERSION(1.04);
+	Module::Install->import;
 	if ( $Module::Install::VERSION < 1.08 ) {
 		warn "Module::Install 1.08+ is recommended; continuing with $Module::Install::VERSION\n";
 	}
@@ -30,6 +33,14 @@ INSTALL_HINT
 	}
 }
 
+
+sub _padre_author_context {
+	# author_context is provided by Module::Install::Author (DSL helper)
+	# once Module::Install has been imported in this script.
+	return Module::Install::Author::author_context() if Module::Install::Author->can('author_context');
+	return author_context() if defined &author_context;
+	return 0;
+}
 
 # Workaround for the fact that Module::Install loads the modules
 # into memory and when Test::NoWarnings is loaded it will hide
@@ -41,7 +52,7 @@ eval {
 };
 
 BEGIN {
-	if ( author_context and not eval("use Locale::Msgfmt 0.15; 1;") ) {
+	if ( _padre_author_context() and not eval("use Locale::Msgfmt 0.15; 1;") ) {
 		die("Install Locale::Msgfmt version 0.15 or higher to build from Git");
 	}
 }
