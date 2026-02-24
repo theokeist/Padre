@@ -9,6 +9,8 @@ This guide is intentionally action-oriented: what to touch first, what to keep, 
 
 ---
 
+Contributor note: Theokeist (THEOKEIST) — github.com/theokeist.
+
 ## 0) What success looks like
 
 By the end of this refactor track:

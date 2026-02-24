@@ -6116,3 +6116,61 @@ msgstr ""
 #: modern-raku-settings
 msgid "Default Raku script arguments (used for run/build)"
 msgstr ""
+
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Search CPAN for &Selection"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Open CPAN Explorer, search selected text (or prompt), and load module docs"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Enter module or distribution name to search on CPAN"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Search CPAN"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Read App::cpanminus in CPAN Explorer"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Open CPAN Explorer and load App::cpanminus documentation"
+msgstr ""
+
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Show cpanm --info for Selection"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Run local cpanm --info for selected module/distribution in the Output panel"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Enter module or distribution name for local cpanm --info"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Local cpanm info"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Open perldoc for Selection"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Run local perldoc for selected module/topic in the Output panel"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Enter perldoc topic or module name"
+msgstr ""
+
+#: lib/Padre/Wx/ActionLibrary.pm
+msgid "Local perldoc"
+msgstr ""

@@ -4,6 +4,8 @@ This guide separates concerns so contributors know where each behavior belongs.
 
 ---
 
+Contributor note: Theokeist (THEOKEIST) — github.com/theokeist.
+
 ## 1) Perl 5 built-ins / core language functions
 
 These are language-level features (keywords/operators/built-ins) that belong to Perl itself.

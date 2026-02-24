@@ -7,6 +7,8 @@ This file contains all library-specific information that was moved out of
 
 ---
 
+Contributor note: Theokeist (THEOKEIST) — github.com/theokeist.
+
 ## 1) How to use this reference
 
 Use this doc to decide whether a library should be:

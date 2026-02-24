@@ -6,6 +6,8 @@ Goal: keep **Perl 5 + Raku** healthy in one IDE, while avoiding risky rewrites.
 
 ---
 
+Contributor note: Theokeist (THEOKEIST) — github.com/theokeist.
+
 ## 1) What Padre uses today for Raku (current stack)
 
 Padre currently supports Raku mostly through existing core components, not a heavy dedicated Raku library stack.

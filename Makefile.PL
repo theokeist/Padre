@@ -5,14 +5,31 @@
 use 5.010000;
 use strict;
 use lib 'privinc';
-use inc::Module::Install 1.12;
 use POSIX qw(locale_h);
 
+our $PADRE_RECOMMENDED_PERL = 5.040000;
+
 BEGIN {
-	if (! defined $Module::Install::VERSION or $Module::Install::VERSION < 1.08) {
-		die "Need to install Module::Install 1.08 before we can continue";
+	my $loaded = eval { require Module::Install; 1 };
+	if ( !$loaded || !defined $Module::Install::VERSION || $Module::Install::VERSION < 1.04 ) {
+		die <<'INSTALL_HINT';
+Need Module::Install 1.04+ before we can continue.
+Install dependencies using normal distribution flow, for example:
+  cpanm Module::Install
+  cpanm --installdeps .
+INSTALL_HINT
+	}
+
+	Module::Install->VERSION(1.04);
+	if ( $Module::Install::VERSION < 1.08 ) {
+		warn "Module::Install 1.08+ is recommended; continuing with $Module::Install::VERSION\n";
+	}
+
+	if ( $] < $PADRE_RECOMMENDED_PERL ) {
+		warn "Perl 5.40+ is recommended for modern Padre development; continuing with $]\n";
 	}
 }
+
 
 # Workaround for the fact that Module::Install loads the modules
 # into memory and when Test::NoWarnings is loaded it will hide
@@ -80,6 +97,7 @@ name 'Padre';
 license 'perl';
 author 'Gabor Szabo';
 all_from 'lib/Padre.pm';
+# Keep legacy compatibility floor, while recommending Perl 5.40+ for active development
 requires 'perl' => '5.011000';
 
 # General dependencies

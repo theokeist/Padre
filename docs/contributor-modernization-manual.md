@@ -4,6 +4,8 @@ A full-path manual for contributors: from environment setup, to reading architec
 
 ---
 
+Contributor note: Theokeist (THEOKEIST) — github.com/theokeist.
+
 ## 1) Start here: development setup
 
 ## 1.1 Baseline prerequisites

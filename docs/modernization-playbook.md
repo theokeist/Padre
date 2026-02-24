@@ -9,6 +9,8 @@ This document is implementation-oriented and can be used as a checklist for real
 
 ---
 
+Contributor note: Theokeist (THEOKEIST) — github.com/theokeist.
+
 ## 1) Modernization Principles
 
 ## 1.1 Compatibility-first modernization

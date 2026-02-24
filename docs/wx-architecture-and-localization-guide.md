@@ -4,6 +4,8 @@ This guide explains how the Wx GUI is structured, where localization is handled,
 
 ---
 
+Contributor note: Theokeist (THEOKEIST) — github.com/theokeist.
+
 ## 1) Wx structure: where to look first
 
 `lib/Padre/Wx/` is organized by responsibility:

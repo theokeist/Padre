@@ -9,6 +9,8 @@ Use this as the execution board for contributors.
 
 ---
 
+Contributor note: Theokeist (THEOKEIST) — github.com/theokeist.
+
 ## Status Legend
 - [ ] **To do**
 - [~] **In doing**
