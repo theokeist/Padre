@@ -14,6 +14,8 @@ For detailed installation instructions look at
 
 http://padre.perlide.org/wiki/Download
 
+For modern macOS builds (Perl 5.42), see `docs/build-macos-perl542.md`.
+
 ## ToDo
 
 - [x] convert from svn to github kaare++
@@ -79,6 +81,12 @@ Pre-install dependencies using the repository cpanfile:
 ```
 cpanm --installdeps .
 cpanm --with-configure --with-test --installdeps .
+```
+
+Or run helper installer:
+
+```
+perl script/install-deps.pl
 ```
 
 

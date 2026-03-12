@@ -8,6 +8,12 @@ To install dependencies before running `Makefile.PL`, use the new `cpanfile`.
 cpanm --installdeps .
 ```
 
+Or use the helper script (checks Module::Install and installs deps):
+
+```bash
+perl script/install-deps.pl
+```
+
 ## Include configure and test dependencies
 
 ```bash
@@ -40,3 +46,8 @@ cpanm --mirror https://cpan.metacpan.org --mirror-only --installdeps .
 ```
 
 If corporate proxy/firewall is involved, configure `HTTP_PROXY`/`HTTPS_PROXY` before running installers.
+
+
+## macOS Perl 5.42 build guide
+
+See `docs/build-macos-perl542.md` for a full macOS-oriented build flow.
