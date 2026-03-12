@@ -33,7 +33,7 @@ Every setting is accessed by a mutator named after it as follows:
 
   # Get the identity of the current user
   my $name = $config->identity_name;
-  
+
   # Set the identity of the current user
   my $changed = $config->identity_name("John Smith");
 
@@ -138,10 +138,6 @@ my $PANEL_OPTIONS = {
 	bottom => _T('Bottom Panel'),
 };
 
-
-
-
-
 #####################################################################
 # Settings Specification
 
@@ -194,10 +190,6 @@ sub setting {
 
 	return 1;
 }
-
-
-
-
 
 #####################################################################
 # Constructor and Input/Output
@@ -304,10 +296,6 @@ sub clone {
 		return $class->new( $host, $human );
 	}
 }
-
-
-
-
 
 ######################################################################
 # Main Methods
@@ -567,10 +555,6 @@ sub themes {
 	return \%themes;
 }
 
-
-
-
-
 ######################################################################
 # Support Functions
 
@@ -582,10 +566,6 @@ sub themes {
 sub _INTEGER {
 	return defined $_[0] && !ref $_[0] && $_[0] =~ m/^(?:0|-?[1-9]\d*)$/;
 }
-
-
-
-
 
 ######################################################################
 # Basic Settings
@@ -648,10 +628,6 @@ setting(
 	project => 1,
 );
 
-
-
-
-
 #####################################################################
 # Startup Behaviour Rules
 
@@ -711,9 +687,6 @@ setting(
 	store   => Padre::Constant::HOST,
 	default => 0,
 );
-
-
-
 
 ######################################################################
 # Main Window Tools and Layout
@@ -1299,6 +1272,13 @@ setting(
 	# every run makes us more future-compatible
 	default => '',
 );
+setting(
+	name  => 'run_raku_cmd',
+	type  => Padre::Constant::ASCII,
+	store => Padre::Constant::HOST,
+	default => '',
+	help  => _T('Raku executable for running Raku files (leave empty to auto-detect raku/rakudo)'),
+);
 
 setting(
 	name  => 'lang_perl5_tags_file',
@@ -1451,6 +1431,22 @@ setting(
 	store   => Padre::Constant::HOST,
 	default => '',
 );
+setting(
+	name    => 'run_raku_interpreter_args_default',
+	type    => Padre::Constant::ASCII,
+	store   => Padre::Constant::HOST,
+	default => '',
+	help    => _T('Default Raku interpreter arguments'),
+);
+
+setting(
+	name    => 'run_raku_script_args_default',
+	type    => Padre::Constant::ASCII,
+	store   => Padre::Constant::HOST,
+	default => '',
+	help    => _T('Default Raku script arguments'),
+);
+
 setting(
 	name    => 'run_use_external_window',
 	type    => Padre::Constant::BOOLEAN,
@@ -1660,13 +1656,13 @@ setting(
 	help    => _T('Enable the experimental command line interface'),
 );
 
-# Toggle Perl 6 auto detection
+# Toggle Raku auto detection
 setting(
 	name    => 'lang_perl6_auto_detection',
 	type    => Padre::Constant::BOOLEAN,
 	store   => Padre::Constant::HUMAN,
 	default => 0,
-	help    => _T('Toggle Perl 6 auto detection in Perl 5 files')
+	help    => _T('Toggle Raku auto detection in Perl 5 files')
 );
 
 # Window menu list shorten common path
@@ -1894,7 +1890,6 @@ setting(
 	default => '',
 );
 
-
 # Support for Module::Starter
 setting(
 	name    => 'module_starter_directory',
@@ -1939,7 +1934,6 @@ setting(
 		#'restrictive'  => _T('Proprietary/Restrictive'),
 	},
 );
-
 
 1;
 

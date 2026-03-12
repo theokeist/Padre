@@ -566,6 +566,23 @@ sub on_synopsis_click {
 	return;
 }
 
+sub search_module {
+	my ( $self, $module ) = @_;
+	return unless defined $module;
+
+	$module =~ s/^\s+//;
+	$module =~ s/\s+$//;
+	return unless length $module;
+
+	$self->{search}->SetValue($module);
+	$self->focus_on_search;
+
+	$self->refresh( 'search', lc $module );
+	$self->refresh( 'pod', { module => $module } );
+
+	return 1;
+}
+
 # Called when search text control is changed
 sub on_search_text {
 	$_[0]->main->cpan->dwell_start( 'refresh', 333 );

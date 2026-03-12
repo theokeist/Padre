@@ -734,6 +734,8 @@ Sebastian Willing (SEWI)
 
 Steffen Müller (TSEE) E<lt>smueller@cpan.orgE<gt>
 
+Theokeist (THEOKEIST) - github.com/theokeist
+
 Zeno Gantner (ZENOG)
 
 =head2 Translators

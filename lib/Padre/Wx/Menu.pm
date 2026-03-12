@@ -30,7 +30,16 @@ sub refresh {1}
 sub Append {
 	my $self  = shift;
 	my $item  = $self->wx->Append(@_);
-	my $label = $item->GetLabelText;
+	my $label = '';
+	if ( $item->can('GetItemLabelText') ) {
+		$label = $item->GetItemLabelText || '';
+	} elsif ( $item->can('GetLabelText') ) {
+		$label = $item->GetLabelText || '';
+	} elsif ( $item->can('GetItemLabel') ) {
+		$label = $item->GetItemLabel || '';
+	} elsif ( $item->can('GetLabel') ) {
+		$label = $item->GetLabel || '';
+	}
 	my ($underlined) = ( $label =~ m/(\&\w)/ );
 	my ($accel)      = ( $label =~ m/(Ctrl-.+|Alt-.+)/ );
 	if ( $underlined or $accel ) {

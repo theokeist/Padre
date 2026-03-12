@@ -5,13 +5,41 @@
 use 5.010000;
 use strict;
 use lib 'privinc';
-use inc::Module::Install 1.12;
 use POSIX qw(locale_h);
 
+our $PADRE_RECOMMENDED_PERL = 5.040000;
+
 BEGIN {
-	if (! defined $Module::Install::VERSION or $Module::Install::VERSION < 1.08) {
-		die "Need to install Module::Install 1.08 before we can continue";
+	my $loaded = eval { require Module::Install; 1 };
+	if ( !$loaded || !defined $Module::Install::VERSION || $Module::Install::VERSION < 1.04 ) {
+		die <<'INSTALL_HINT';
+Need Module::Install 1.04+ before we can continue.
+Install dependencies using normal distribution flow, for example:
+  cpanm Module::Install
+  cpanm --installdeps .
+  cpan -T Module::Install
+  cpan -T --installdeps .
+INSTALL_HINT
 	}
+
+	Module::Install->VERSION(1.04);
+	Module::Install->import;
+	if ( $Module::Install::VERSION < 1.08 ) {
+		warn "Module::Install 1.08+ is recommended; continuing with $Module::Install::VERSION\n";
+	}
+
+	if ( $] < $PADRE_RECOMMENDED_PERL ) {
+		warn "Perl 5.40+ is recommended for modern Padre development; continuing with $]\n";
+	}
+}
+
+
+sub _padre_author_context {
+	# author_context is provided by Module::Install::Author (DSL helper)
+	# once Module::Install has been imported in this script.
+	return Module::Install::Author::author_context() if Module::Install::Author->can('author_context');
+	return author_context() if defined &author_context;
+	return 0;
 }
 
 # Workaround for the fact that Module::Install loads the modules
@@ -24,7 +52,7 @@ eval {
 };
 
 BEGIN {
-	if ( author_context and not eval("use Locale::Msgfmt 0.15; 1;") ) {
+	if ( _padre_author_context() and not eval("use Locale::Msgfmt 0.15; 1;") ) {
 		die("Install Locale::Msgfmt version 0.15 or higher to build from Git");
 	}
 }
@@ -80,6 +108,7 @@ name 'Padre';
 license 'perl';
 author 'Gabor Szabo';
 all_from 'lib/Padre.pm';
+# Keep legacy compatibility floor, while recommending Perl 5.40+ for active development
 requires 'perl' => '5.011000';
 
 # General dependencies
